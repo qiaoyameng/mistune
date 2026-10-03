@@ -105,6 +105,10 @@ Plugins
 
 .. autofunction:: spoiler
 
+.. module:: mistune.plugins.citations
+
+.. autofunction:: citations
+
 Renderers
 ---------
 

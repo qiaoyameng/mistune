@@ -378,6 +378,7 @@ def _get_rule_start_chars(name: str, pattern: Optional[str]) -> Optional[Set[str
         "inline_math": {"$"},
         "ruby": {"["},
         "inline_spoiler": {">"},
+        "citation": {"["},
     }
     if name in known:
         return known[name]

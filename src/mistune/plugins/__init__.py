@@ -20,6 +20,7 @@ _plugins = {
     "ruby": "mistune.plugins.ruby.ruby",
     "task_lists": "mistune.plugins.task_lists.task_lists",
     "spoiler": "mistune.plugins.spoiler.spoiler",
+    "citations": "mistune.plugins.citations.citations",
 }
 
 

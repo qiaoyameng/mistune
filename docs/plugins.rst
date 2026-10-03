@@ -488,3 +488,45 @@ You can also pass the plugin function directly::
 
     renderer = mistune.HTMLRenderer()
     markdown = mistune.Markdown(renderer, plugins=[spoiler])
+
+
+citations
+---------
+
+The citations plugin adds pandoc style citations for research notes:
+
+.. code-block:: text
+
+    A claim [@smith2020, p. 3; -@lee2021], see also [see @wu2022, ch. 2].
+
+Each item in a bracket holds an optional prefix, a citation key, an
+optional ``-`` suppress-author flag, and an optional suffix which may
+start with a locator (``p.``, ``pp.``, ``ch.``, ``sec.``, ``vol.``,
+``fig.``, ``no.``, ``§``, ``¶``). Items are separated by ``;``, a
+backslash escapes punctuation (``\;``, ``\,``, ``\[``, ``\]``, ``\@``),
+and balanced nested brackets are allowed in prefixes and suffixes.
+Citations are never recognized inside code spans or links.
+
+The plugin does not access the network or format references itself. All
+unique keys in a document are collected and resolved in a single batch
+call to a caller-provided resolver:
+
+.. code-block:: python
+
+    from functools import partial
+
+    import mistune
+    from mistune.plugins.citations import citations
+
+    def resolver(keys):
+        return {key: bibliography[key] for key in keys if key in bibliography}
+
+    markdown = mistune.create_markdown(plugins=[partial(citations, resolver=resolver)])
+
+The resolver receives the unique keys in first-citation order and returns
+a mapping of key to a formatted reference string (or a mapping with a
+``"text"`` item). References are numbered by first citation and rendered
+as a plain numeric bibliography with back-links; repeated citations of a
+key share its number while keeping their own locators. Keys missing from
+the resolver result are kept as visible "unresolved" diagnostics instead
+of fabricated references.
