@@ -57,6 +57,18 @@ Plugins
 
 .. autofunction:: footnotes
 
+.. module:: mistune.plugins.citations
+
+.. autofunction:: citations
+
+.. autoclass:: Citation
+    :members:
+
+.. autoclass:: CitationGroup
+    :members:
+
+.. autofunction:: parse_citation_group
+
 .. module:: mistune.plugins.task_lists
 
 .. autofunction:: task_lists

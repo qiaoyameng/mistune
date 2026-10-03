@@ -488,3 +488,54 @@ You can also pass the plugin function directly::
 
     renderer = mistune.HTMLRenderer()
     markdown = mistune.Markdown(renderer, plugins=[spoiler])
+
+
+citations
+---------
+
+The citations plugin adds pandoc-style numeric citations for research
+notes. Citations live inside square brackets and each citation starts
+with an ``@key``:
+
+.. code-block:: text
+
+    See [@smith2020] for the overview.
+    The proof is in [@smith2020, p. 3; -@lee2021].
+
+* Semicolons (``;``) separate several citations in one group.
+* A comma (``,``) introduces a prefix or a suffix (locator).
+* ``-@key`` suppresses the author for that citation.
+* Backslashes escape punctuation, and square brackets inside a group
+  must be escaped; nested groups are not supported.
+* Code spans, fenced code, existing links and inline HTML are never
+  treated as citations.
+
+Bibliographic data is supplied by the caller through a batch *resolver*.
+The resolver receives the ordered list of unique keys once per document
+and returns either a mapping of ``key -> entry`` or a sequence aligned
+with the requested keys. The plugin never accesses the network.
+
+Each entry is a string, or a mapping with fields such as ``text``,
+``authors``, ``year``, ``title``, ``container``, ``publisher``,
+``volume``, ``issue``, ``pages`` or ``url``. Unknown keys keep a visible
+``citation-missing`` marker and are excluded from the bibliography.
+Numbering follows the order of first citation; a key cited several times
+keeps the same number while each occurrence renders its own locator.
+This is a plain numeric style, not a full CSL processor.
+
+.. code-block:: python
+
+    from mistune.plugins.citations import citations
+
+    entries = {"smith2020": {"text": "Smith, J. (2020). A book."}}
+
+    def resolve(keys):
+        return {key: entries.get(key) for key in keys}
+
+    markdown = mistune.create_markdown(plugins=[citations(resolve)])
+
+In AST mode (``renderer='ast'``) citations remain structured: a
+``cite_group`` token contains ``cite_ref`` / ``cite_ref_unknown``
+children with ``key``, ``index``, ``locator``, ``suffix`` and
+``suppress_author`` attributes, and the bibliography is emitted as a
+``bib_section`` token.
