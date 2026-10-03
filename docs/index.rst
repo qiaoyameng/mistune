@@ -38,6 +38,7 @@ User Guide
    cli
    renderers
    plugins
+   book
    directives
    advanced
    api

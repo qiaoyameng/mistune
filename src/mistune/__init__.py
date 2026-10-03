@@ -17,6 +17,7 @@ from .markdown import Markdown
 from .plugins import Plugin, PluginRef, import_plugin
 from .renderers.html import HTMLRenderer
 from .util import escape, escape_url, safe_entity, unikey
+from .book import BookError, BookResult, Diagnostic, Document, MarkdownBook, combine_markdown
 
 RendererRef = Union[Literal["html", "ast"], BaseRenderer]
 
@@ -100,6 +101,12 @@ __all__ = [
     "html",
     "create_markdown",
     "markdown",
+    "Document",
+    "Diagnostic",
+    "BookResult",
+    "BookError",
+    "MarkdownBook",
+    "combine_markdown",
 ]
 
 __version__ = "3.4.0"

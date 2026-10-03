@@ -138,3 +138,26 @@ Directives
 .. autoclass:: RSTDirective
 
 .. autoclass:: FencedDirective
+
+Books
+-----
+
+Combine independent Markdown documents into one manual.  See
+:doc:`book` for the narrative guide.
+
+.. autoclass:: Document
+   :members:
+
+.. autoclass:: MarkdownBook
+   :members:
+
+.. autoclass:: BookResult
+   :members:
+
+.. autoclass:: Diagnostic
+   :members:
+
+.. autoclass:: BookError
+   :members:
+
+.. autofunction:: combine_markdown
