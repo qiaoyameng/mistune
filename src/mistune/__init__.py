@@ -11,6 +11,7 @@ Documentation: https://mistune.lepture.com/
 from typing import Any, Dict, Iterable, List, Literal, Optional, Tuple, Union
 
 from .block_parser import BlockParser
+from .book import Book, BookComposer, BookError, Diagnostic, compose_book
 from .core import BaseRenderer, BlockState, InlineState
 from .inline_parser import InlineParser
 from .markdown import Markdown
@@ -100,6 +101,11 @@ __all__ = [
     "html",
     "create_markdown",
     "markdown",
+    "Book",
+    "BookComposer",
+    "BookError",
+    "Diagnostic",
+    "compose_book",
 ]
 
 __version__ = "3.4.0"

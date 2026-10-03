@@ -58,6 +58,9 @@ class Markdown:
 
     def _iter_render(self, tokens: Iterable[Dict[str, Any]], state: BlockState) -> Iterable[Dict[str, Any]]:
         for tok in tokens:
+            if tok.get("_inline_done"):
+                yield tok
+                continue
             if "children" in tok:
                 children = self._iter_render(tok["children"], state)
                 tok["children"] = list(children)

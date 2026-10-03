@@ -50,6 +50,26 @@ Advanced
 .. autoclass:: InlineParser
     :inherited-members: register
 
+
+Book composer
+-------------
+
+.. automodule:: mistune.book
+
+.. autofunction:: compose_book
+
+.. autoclass:: BookComposer
+    :members: compose
+
+.. autoclass:: Book
+    :members:
+
+.. autoclass:: Diagnostic
+    :members:
+
+.. autoclass:: BookError
+    :members:
+
 Plugins
 -------
 
