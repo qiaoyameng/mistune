@@ -6,6 +6,9 @@ Here is the full history of mistune v3.
 Unreleased
 ----------
 
+* Add an optional ``grid_table`` plugin for reStructuredText-style grid
+  tables with row and column spans.
+
 Version 3.3.4
 -------------
 

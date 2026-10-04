@@ -106,6 +106,39 @@ You can also pass the plugin function directly::
     markdown = mistune.Markdown(renderer, plugins=[table])
 
 
+grid_table
+----------
+
+The grid table plugin parses reStructuredText-style ``+---+`` tables.
+Column and row spans follow the table borders; the existing ``table``
+plugin remains available for Markdown pipe tables.
+
+.. code-block:: text
+
+    +---------------+-------+
+    | Title         | C     |
+    +=======+=======+=======+
+    | Side  | B     | C     |
+    |       +-------+-------+
+    |       | D     | E     |
+    +-------+-------+-------+
+
+Cell borders must line up. A vertical bar in cell text is only treated as
+a border when it is aligned with a border column. Cell text is unindented
+and parsed by the normal block parser, so paragraphs, lists, and code blocks
+are supported.
+
+Invalid grids are left as normal Markdown text. The Markdown renderer emits
+an explicit text fallback beginning with ``[grid-table]``; ``colspan``,
+``rowspan``, and header cells are labeled inline.
+
+Enable the plugin explicitly::
+
+    markdown = mistune.create_markdown(plugins=['grid_table'])
+
+The plugin is not enabled by ``mistune.html()``.
+
+
 url
 ---
 
