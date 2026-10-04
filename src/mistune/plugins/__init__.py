@@ -13,6 +13,7 @@ _plugins = {
     "subscript": "mistune.plugins.formatting.subscript",
     "footnotes": "mistune.plugins.footnotes.footnotes",
     "table": "mistune.plugins.table.table",
+    "grid_table": "mistune.plugins.grid_table.grid_table",
     "url": "mistune.plugins.url.url",
     "abbr": "mistune.plugins.abbr.abbr",
     "def_list": "mistune.plugins.def_list.def_list",

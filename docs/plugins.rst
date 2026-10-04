@@ -106,6 +106,44 @@ You can also pass the plugin function directly::
     markdown = mistune.Markdown(renderer, plugins=[table])
 
 
+grid table
+----------
+
+The optional ``grid_table`` plugin adds reStructuredText-style grid tables.
+It keeps the existing pipe-table plugin unchanged and supports row and column
+spans when merged cells form closed rectangles:
+
+.. code-block:: text
+
+    +-----+-----+-----+
+    | Head      | H3  |
+    +=====+=====+=====+
+    | A   | B         |
+    |     +-----+-----+
+    |     | C   | D   |
+    +-----+-----+-----+
+
+Only pipes aligned with a grid border can divide cells. Cell content may
+contain multiple paragraphs, lists, and code blocks; the common table
+indentation is removed before the content is parsed as normal Markdown.
+
+Invalid grids use the fixed fallback policy: they are parsed as ordinary
+paragraph text rather than a partial table. The Markdown renderer also emits
+an explicit text fallback with ``colspan`` and ``rowspan`` markers.
+
+Enable the plugin separately from the pipe table:
+
+.. code-block:: python
+
+    markdown = mistune.create_markdown(plugins=['grid_table'])
+
+Both plugins can also be enabled together:
+
+.. code-block:: python
+
+    markdown = mistune.create_markdown(plugins=['table', 'grid_table'])
+
+
 url
 ---
 
